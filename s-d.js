@@ -12,6 +12,14 @@ export class SimpleDB {
         return writeFile(this.newFile, item);
     }
 
+    get() {
+
+    }
+
+    getAll() {
+
+    }
+
 }
 
 
