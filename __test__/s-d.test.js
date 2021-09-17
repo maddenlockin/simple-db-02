@@ -1,11 +1,10 @@
-//import ;
 /* eslint-disable indent */
 
 import { rm, mkdir } from 'fs/promises';
 import { SimpleDB } from '../s-d';
-//import { SimpleDB } from '../s-d';
 
-describe('routes for simple database api', () => {
+
+describe('simple database api', () => {
     //set up root directory
     const destination = './dest';
 
@@ -26,14 +25,14 @@ describe('routes for simple database api', () => {
 
         return saver
             .save(firstItem)
-            .then(() => {
-                expect(firstItem.id).toEqual(expect.any(String));
+            .then((id) => {
+                expect(id).toEqual(expect.any(String));
             });
     });
 
     it('saves and retrieves an object from the database', () => {
         const savedItem = new SimpleDB(destination);
-        const getItem = new SimpleDB(id);
+        //const getItem = new SimpleDB(id);
         const firstItem = {
             category: 'shelter',
             type: 'tent',
@@ -42,19 +41,23 @@ describe('routes for simple database api', () => {
 
         return savedItem
             .save(firstItem)
-            .then(() => {
-                return getItem.get();
-            })
-            .then((booger) => {
-                expect(booger).toEqual(firstItem);
+            .then((id) => {
+                return savedItem.get(id).then((res) => {
+                    expect(res).toEqual({
+                        id: expect.any(String),
+                        category: 'shelter',
+                        type: 'tent',
+                        material: 'canvas',
+                    });
+                });
             });
     });
 
     it('should return null if no object was returned', () => {
-        const getInstance = new SimpleDB(id);
+        const getInstance = new SimpleDB(destination);
     
-        return getInstance.get().then((booger) => {
-        expect(booger).toBeNull();
+        return getInstance.get().then((res) => {
+        expect(res).toBeNull();
         });
     });
 });

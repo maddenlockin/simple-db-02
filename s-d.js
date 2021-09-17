@@ -1,19 +1,29 @@
 import path from 'path/posix';
-import { writeFile } from 'fs/promises';
+import { readFile, writeFile } from 'fs/promises';
 import shortid from 'shortid';
 /* eslint-disable indent */
 
 export class SimpleDB {
     constructor(destination) {
-        const fileName = `${shortid.generate()}.txt`;
-        this.newFile = path.join(destination, fileName);
+        this.path = destination;
     }
+
     save(item) {
-        return writeFile(this.newFile, item);
+        item.id = shortid.generate();
+        const dest = path.join(this.path, `${item.id}.json`);
+        return writeFile(dest, JSON.stringify(item.id)).then(() => {
+            return `${item.id}.json`;
+        });
     }
 
-    get() {
-
+    get(id) {
+        const getFile = path.join(this.path, id);
+        return readFile(getFile).then((res) => {
+            return JSON.parse(res);
+        })
+        .catch(() => {
+            return null;
+        });
     }
 
     getAll() {
