@@ -39,16 +39,3 @@ export class SimpleDB {
 }
 
 
-
-
-
-
-
-
-
-// const actions = fsPromises
-    //.readFile('file-name.mg, 'utf8')
-    //.then()
-    //.then()
-    //.then()
-
