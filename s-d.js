@@ -1,5 +1,5 @@
 import path from 'path/posix';
-import { readFile, writeFile } from 'fs/promises';
+import { readFile, writeFile, readdir } from 'fs/promises';
 import shortid from 'shortid';
 /* eslint-disable indent */
 
@@ -33,7 +33,14 @@ export class SimpleDB {
     }
 
     getAll() {
-
+        return readdir(this.path).then((files) => {
+            return Promise.all(
+                files.map((file) => {
+                    const getAllFiles = file.split('.');
+                    return this.get(getAllFiles[0]);
+            })
+        );
+    });
     }
 
 }

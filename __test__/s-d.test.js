@@ -61,39 +61,39 @@ describe('simple database api', () => {
         });
     });
 
-    // xit('should return all objects in the database', () => {
-    //     const database = new SimpleDB(destination);
-    //     const allItems = [
-    //         { 
-    //             category: 'shelter',
-    //             type: 'tent',
-    //             material: 'canvas', 
-    //         },
-    //         { 
-    //             category: 'shelter',
-    //             type: 'house',
-    //             material: 'brick',
-    //         },  
-    //     ];
-    //     allItems.forEach((item) => database.save(item));
-    //     return database.getAll().then((res) => {
-    //         expect(new Set(res)).toEqual(
-    //             new Set([
-    //                 {
-    //                     id: expect.any(String),
-    //                     category: 'shelter',
-    //                     type: 'tent',
-    //                     material: 'canvas',
-    //                 },
-    //                 {
-    //                     id: expect.any(String),
-    //                     category: 'shelter',
-    //                     type: 'house',
-    //                     material: 'brick',
-    //                 },
-    //             ])
-    //         );
-    //     });
-    // });
+    it('should return all objects in the database', () => {
+        const database = new SimpleDB(destination);
+        const allItems = [
+            { 
+                category: 'shelter',
+                type: 'tent',
+                material: 'canvas', 
+            },
+            { 
+                category: 'shelter',
+                type: 'house',
+                material: 'brick',
+            },  
+        ];
+        allItems.forEach((item) => database.save(item));
+        return database.getAll().then((res) => {
+            expect(new Set(res)).toEqual(
+                new Set([
+                    {
+                        id: expect.any(String),
+                        category: 'shelter',
+                        type: 'tent',
+                        material: 'canvas',
+                    },
+                    {
+                        id: expect.any(String),
+                        category: 'shelter',
+                        type: 'house',
+                        material: 'brick',
+                    },
+                ])
+            );
+        });
+    });
 });
 
