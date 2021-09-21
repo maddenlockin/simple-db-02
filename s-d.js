@@ -10,9 +10,10 @@ export class SimpleDB {
 
     save(item) {
         item.id = shortid.generate();
+        const fileName = `${item.id}.json`;
         const dest = path.join(this.path, `${item.id}.json`);
-        return writeFile(dest, JSON.stringify(item.id)).then(() => {
-            return `${item.id}.json`;
+        return writeFile(dest, JSON.stringify(item)).then(() => {
+            return fileName;
         });
     }
 
