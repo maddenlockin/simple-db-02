@@ -22,8 +22,9 @@ export class SimpleDB {
         return readFile(getFile).then((res) => {
             return JSON.parse(res);
         })
-        .catch(() => {
-            return null;
+        .catch((err) => {
+            if (err.code === 'ENOENT') return null;
+            throw err;
         });
     }
 

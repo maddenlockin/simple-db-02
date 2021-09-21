@@ -61,7 +61,7 @@ describe('simple database api', () => {
         });
     });
 
-    it('should return all objects in the database', () => {
+    xit('should return all objects in the database', () => {
         const database = new SimpleDB(destination);
         const allItems = [
             { 
