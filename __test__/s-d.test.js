@@ -1,6 +1,7 @@
 /* eslint-disable indent */
 
 import { rm, mkdir } from 'fs/promises';
+import path from 'path/posix';
 import { SimpleDB } from '../s-d';
 
 
@@ -41,8 +42,8 @@ describe('simple database api', () => {
 
         return savedItem
             .save(firstItem)
-            .then((id) => {
-                return savedItem.get(id).then((res) => {
+            .then(() => {
+                return savedItem.get(firstItem.id).then((res) => {
                     expect(res).toEqual({
                         id: expect.any(String),
                         category: 'shelter',
