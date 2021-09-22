@@ -31,18 +31,16 @@ export class SimpleDB {
             throw err;
         });
     }
-
+    
     getAll() {
         return readdir(this.path).then((files) => {
             return Promise.all(
                 files.map((file) => {
                     const getAllFiles = file.split('.');
                     return this.get(getAllFiles[0]);
-            })
-        );
-    });
+                })
+            );
+        
+        });
     }
-
 }
-
-

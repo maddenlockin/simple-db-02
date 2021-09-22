@@ -6,7 +6,7 @@ import { SimpleDB } from '../s-d';
 
 describe('simple database api', () => {
     //set up root directory
-    const destination = './dest';
+    const destination = '../dest';
 
     beforeEach(() => {
         return rm(destination, { force: true, recursive: true })
